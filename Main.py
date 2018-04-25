@@ -1,6 +1,5 @@
 from Graph import Graph
 from collections import deque
-from Item import Item
 
 def dijsktra(graph, initial):  # initial baslangic nodu
   visited = {initial: 0}
@@ -142,16 +141,30 @@ def computeTotal(*args):
         sum += args[i][1]
     return sum
 
+def detectClosestCity(currentLocation,container):
+    distanceArray = []
+    for i in range(len(container)):
+        try:
+            x = container[i*2]
+            distanceArray.append(shortest_path(graph=graph,origin=currentLocation,destination=x))
+        except IndexError:
+            pass
+        except KeyError:
+            pass
+    print(min(distanceArray))
+
 if __name__ == '__main__':
     graph = initializeGraph()
     startLocation = "Neamt"
-    currentLocation = "Neamt"
-    shopSet1 = ("C",5)
+    currentLocation = "Sibiu"
+    shopSet1 = ("B",5)
     shopSet2 = ("A",10)
     shopList = [shopSet1,shopSet2]
     total = computeTotal(shopSet1,shopSet2)
-    print(graph.edges)
+    #print(graph.edges)
     while total is not 0:
         for element in shopList:
-            if "A" in element:
-                print("C is in")
+            if "B" in element:
+                detectClosestCity("Neamt", graph.cityContainB)
+                #print(detectClosestCity(currentLocation,graph.cityContainB))
+        break
