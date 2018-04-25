@@ -134,13 +134,6 @@ def shortest_path(graph, origin, destination):
 
     return visited[destination], list(full_path)
 
-
-def computeTotal(*args):
-    sum = 0
-    for i in range(len(args)):
-        sum += args[i][1]
-    return sum
-
 def detectClosestCity(currentLocation,container):
     distanceArray = []
     for i in range(len(container)):
@@ -156,15 +149,22 @@ def detectClosestCity(currentLocation,container):
 if __name__ == '__main__':
     graph = initializeGraph()
     startLocation = "Neamt"
-    currentLocation = "Sibiu"
-    shopSet1 = ("B",5)
-    shopSet2 = ("A",10)
-    shopList = [shopSet1,shopSet2]
-    total = computeTotal(shopSet1,shopSet2)
-    #print(graph.edges)
+    currentLocation = "Neamt"
+    shopDict = {"A":10,"B":5}
+    total = 0
+    for key in shopDict.keys():
+        total += shopDict[key]
+    path = [] # Shows full path
+
     while total is not 0:
-        for element in shopList:
-            if "B" in element:
-                detectClosestCity("Neamt", graph.cityContainB)
-                #print(detectClosestCity(currentLocation,graph.cityContainB))
-        break
+        for element in shopDict.keys():
+            #Start location icin de buraya bir if case i ac
+            while shopDict[element] is not 0:
+
+                if "A" in element:
+                    detectClosestCity(currentLocation,graph.cityContainA)
+                if "B" in element:
+                    detectClosestCity(currentLocation,graph.cityContainB)
+                if "C" in element:
+                    detectClosestCity(currentLocation,graph.cityContainC)
+
