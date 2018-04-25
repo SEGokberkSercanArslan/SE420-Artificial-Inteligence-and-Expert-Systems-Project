@@ -147,4 +147,3 @@ if __name__ == '__main__':
     top.append(var2)
     print(top)
     print(min(top))
-    print(graph.itemCounter)
