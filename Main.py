@@ -1,4 +1,6 @@
 from Graph import Graph
+from collections import deque
+from Item import Item
 
 def dijsktra(graph, initial):  # initial baslangic nodu
   visited = {initial: 0}
@@ -119,9 +121,30 @@ def initializeGraph():
 
     return graph
 
+def shortest_path(graph, origin, destination):
+    visited, paths = dijsktra(graph, origin)
+    full_path = deque()
+    _destination = paths[destination]
+
+    while _destination != origin:
+        full_path.appendleft(_destination)
+        _destination = paths[_destination]
+
+    full_path.appendleft(origin)
+    full_path.append(destination)
+
+    return visited[destination], list(full_path)
+
+
 
 
 if __name__ == '__main__':
     graph = initializeGraph()
-    var = dijsktra(graph,"Bucharest")
-    print(var[0])
+    var = shortest_path(graph,"Zerind","Timisoara")
+    var2= shortest_path(graph,"Zerind","Fagaras")
+    top = []
+    top.append(var)
+    top.append(var2)
+    print(top)
+    print(min(top))
+    print(graph.itemCounter)
