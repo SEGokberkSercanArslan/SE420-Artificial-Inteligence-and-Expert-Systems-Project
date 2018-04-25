@@ -155,7 +155,11 @@ if __name__ == '__main__':
     total = 0
     for key in shopDict.keys():
         total += shopDict[key]
-    path = [] # Shows full path
+    pathLog = [] # Shows full path
+
+
+    # Note, After while loop draw a path current node -> start Node
+    # Add path to pathLog
 
     while total is not 0:
         for element in shopDict.keys(): # element is A -> B -> C
@@ -172,9 +176,22 @@ if __name__ == '__main__':
                         moveNext = True
                         pass
                 if "A" in element:
-                    detectClosestCity(currentLocation,graph.cityContainA) # (910, ['Neamt', 'Iasi', 'Vaslui', 'Urziceni', 'Bucharest', 'Pitesti', 'Craiova', 'Drobeta', 'Mehadia', 'Lugoj'])
-                if "B" in element:                                        # Test Output
-                    detectClosestCity(currentLocation,graph.cityContainB)
-                if "C" in element:
-                    detectClosestCity(currentLocation,graph.cityContainC)
+                    detected = detectClosestCity(currentLocation,graph.cityContainA) # (910, ['Neamt', 'Iasi', 'Vaslui', 'Urziceni', 'Bucharest', 'Pitesti', 'Craiova', 'Drobeta', 'Mehadia', 'Lugoj'])
+                    if graph.inventoryA[detected[0][-1]] > shopDict["A"]:
+                        pass
+                    else:
+                        pass
 
+                if "B" in element:                                        # Test Output
+                    detected = detectClosestCity(currentLocation,graph.cityContainB)
+                    if graph.inventoryA[detected[0][-1]] > shopDict["A"]:
+                        pass
+                    else:
+                        pass
+
+                if "C" in element:
+                    detected = detectClosestCity(currentLocation,graph.cityContainC)
+                    if graph.inventoryA[detected[0][-1]] > shopDict["A"]:
+                        pass
+                    else:
+                        pass
