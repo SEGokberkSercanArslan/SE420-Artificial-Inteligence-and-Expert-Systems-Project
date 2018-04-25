@@ -151,19 +151,29 @@ if __name__ == '__main__':
     startLocation = "Neamt"
     currentLocation = "Neamt"
     shopDict = {"A":10,"B":5}
+    moveNext = False
     total = 0
     for key in shopDict.keys():
         total += shopDict[key]
     path = [] # Shows full path
 
     while total is not 0:
-        for element in shopDict.keys():
+        for element in shopDict.keys(): # element is A -> B -> C
             #Start location icin de buraya bir if case i ac
             while shopDict[element] is not 0:
-
+                if currentLocation is startLocation and moveNext is False:
+                    if element is "A" and currentLocation in graph.cityContainA:
+                        moveNext = True
+                        pass
+                    elif element is "B" and currentLocation in graph.cityContainB:
+                        moveNext = True
+                        pass
+                    elif element is "C" and currentLocation in graph.cityContainC:
+                        moveNext = True
+                        pass
                 if "A" in element:
-                    detectClosestCity(currentLocation,graph.cityContainA)
-                if "B" in element:
+                    detectClosestCity(currentLocation,graph.cityContainA) # (910, ['Neamt', 'Iasi', 'Vaslui', 'Urziceni', 'Bucharest', 'Pitesti', 'Craiova', 'Drobeta', 'Mehadia', 'Lugoj'])
+                if "B" in element:                                        # Test Output
                     detectClosestCity(currentLocation,graph.cityContainB)
                 if "C" in element:
                     detectClosestCity(currentLocation,graph.cityContainC)
