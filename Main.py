@@ -144,15 +144,14 @@ def computeTotal(*args):
 
 if __name__ == '__main__':
     graph = initializeGraph()
-    #var = shortest_path(graph,"Zerind","Timisoara")
-    #var2= shortest_path(graph,"Zerind","Fagaras")
-    #top = []
-    #top.append(var)
-    #top.append(var2)
     startLocation = "Neamt"
+    currentLocation = "Neamt"
     shopSet1 = ("C",5)
     shopSet2 = ("A",10)
+    shopList = [shopSet1,shopSet2]
     total = computeTotal(shopSet1,shopSet2)
     print(graph.edges)
     while total is not 0:
-        pass
+        for element in shopList:
+            if "A" in element:
+                print("C is in")
