@@ -136,14 +136,23 @@ def shortest_path(graph, origin, destination):
     return visited[destination], list(full_path)
 
 
-
+def computeTotal(*args):
+    sum = 0
+    for i in range(len(args)):
+        sum += args[i][1]
+    return sum
 
 if __name__ == '__main__':
     graph = initializeGraph()
-    var = shortest_path(graph,"Zerind","Timisoara")
-    var2= shortest_path(graph,"Zerind","Fagaras")
-    top = []
-    top.append(var)
-    top.append(var2)
-    print(top)
-    print(min(top))
+    #var = shortest_path(graph,"Zerind","Timisoara")
+    #var2= shortest_path(graph,"Zerind","Fagaras")
+    #top = []
+    #top.append(var)
+    #top.append(var2)
+    startLocation = "Neamt"
+    shopSet1 = ("C",5)
+    shopSet2 = ("A",10)
+    total = computeTotal(shopSet1,shopSet2)
+    print(graph.edges)
+    while total is not 0:
+        pass
