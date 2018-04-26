@@ -144,7 +144,7 @@ def detectClosestCity(currentLocation,container):
             pass
         except KeyError:
             pass
-    print(min(distanceArray))
+    return min(distanceArray)
 
 if __name__ == '__main__':
     graph = initializeGraph()
@@ -177,21 +177,33 @@ if __name__ == '__main__':
                         pass
                 if "A" in element:
                     detected = detectClosestCity(currentLocation,graph.cityContainA) # (910, ['Neamt', 'Iasi', 'Vaslui', 'Urziceni', 'Bucharest', 'Pitesti', 'Craiova', 'Drobeta', 'Mehadia', 'Lugoj'])
-                    if graph.inventoryA[detected[0][-1]] > shopDict["A"]:
+                    detectedCity = list(detected)[1][-1]
+                    if graph.inventoryA[detectedCity] > shopDict["A"]:
+                        print("Big")
+                        shopDict["A"] -= graph.inventoryA[detectedCity]
+                        graph.inventoryA[detectedCity] = 0
+                        pathLog.append(detected)
                         pass
                     else:
+                        print("Small")
                         pass
 
                 if "B" in element:                                        # Test Output
                     detected = detectClosestCity(currentLocation,graph.cityContainB)
-                    if graph.inventoryA[detected[0][-1]] > shopDict["A"]:
+                    if graph.inventoryB[detectedCity] > shopDict["B"]:
+                        shopDict["B"] -= graph.inventoryB[detectedCity]
+                        graph.inventoryB[detectedCity] = 0
+                        pathLog.append(detected)
                         pass
                     else:
                         pass
 
                 if "C" in element:
                     detected = detectClosestCity(currentLocation,graph.cityContainC)
-                    if graph.inventoryA[detected[0][-1]] > shopDict["A"]:
+                    if graph.inventoryC[detectedCity] > shopDict["C"]:
+                        shopDict["C"] -= graph.inventoryC[detectedCity]
+                        graph.inventoryC[detectedCity] = 0
+                        pathLog.append(detected)
                         pass
                     else:
                         pass
