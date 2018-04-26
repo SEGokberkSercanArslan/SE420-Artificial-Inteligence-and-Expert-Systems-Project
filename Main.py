@@ -161,6 +161,8 @@ if __name__ == '__main__':
     # Note, After while loop draw a path current node -> start Node
     # Add path to pathLog
 
+    # Lugoj ve mehadia'yı listeden düşülmesi gerek
+
     while total is not 0:
         for element in shopDict.keys(): # element is A -> B -> C
             #Start location icin de buraya bir if case i ac
@@ -177,33 +179,52 @@ if __name__ == '__main__':
                         pass
                 if "A" in element:
                     detected = detectClosestCity(currentLocation,graph.cityContainA) # (910, ['Neamt', 'Iasi', 'Vaslui', 'Urziceni', 'Bucharest', 'Pitesti', 'Craiova', 'Drobeta', 'Mehadia', 'Lugoj'])
+                    #print(detectClosestCity("Lugoj",graph.cityContainA))
                     detectedCity = list(detected)[1][-1]
-                    if graph.inventoryA[detectedCity] > shopDict["A"]:
-                        print("Big")
+                    if graph.inventoryA[detectedCity] >= shopDict["A"]:
+                        graph.inventoryA[detectedCity] -= shopDict["A"]
+                        shopDict["A"] = 0
+                        currentLocation = detectedCity
+                        pathLog.append(detected)
+                        print("Big A")
+                        print(shopDict)
+                    else:
                         shopDict["A"] -= graph.inventoryA[detectedCity]
                         graph.inventoryA[detectedCity] = 0
+                        currentLocation = detectedCity
                         pathLog.append(detected)
-                        pass
-                    else:
-                        print("Small")
-                        pass
+                        print("Small A"+str(currentLocation))
+                        print(shopDict)
 
                 if "B" in element:                                        # Test Output
                     detected = detectClosestCity(currentLocation,graph.cityContainB)
-                    if graph.inventoryB[detectedCity] > shopDict["B"]:
+                    detectedCity = list(detected)[1][-1]
+                    if graph.inventoryB[detectedCity] >= shopDict["B"]:
+                        graph.inventoryB[detectedCity] -= shopDict["B"]
+                        shopDict["B"] = 0
+                        currentLocation = detectedCity
+                        pathLog.append(detected)
+                        print("Big B")
+                    else:
                         shopDict["B"] -= graph.inventoryB[detectedCity]
                         graph.inventoryB[detectedCity] = 0
+                        currentLocation = detectedCity
                         pathLog.append(detected)
-                        pass
-                    else:
-                        pass
+                        print("Small B: "+str(currentLocation))
+                        print(shopDict)
 
                 if "C" in element:
                     detected = detectClosestCity(currentLocation,graph.cityContainC)
-                    if graph.inventoryC[detectedCity] > shopDict["C"]:
+                    detectedCity = list(detected)[1][-1]
+                    if graph.inventoryC[detectedCity] >= shopDict["C"]:
+                        graph.inventoryC[detectedCity] -= shopDict["C"]
+                        shopDict["C"] = 0
+                        currentLocation = detectedCity
+                        pathLog.append(detected)
+                        print("Big C")
+                    else:
                         shopDict["C"] -= graph.inventoryC[detectedCity]
                         graph.inventoryC[detectedCity] = 0
+                        currentLocation = detectedCity
                         pathLog.append(detected)
-                        pass
-                    else:
-                        pass
+                        print("Small C")
