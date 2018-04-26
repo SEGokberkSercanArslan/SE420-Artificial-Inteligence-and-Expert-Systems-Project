@@ -6,12 +6,12 @@ class Graph:
     self.nodes = set()
     self.edges = defaultdict(list)
     self.distances = {}
-    self.cityContainA = ["Lugoj",10]
-    self.cityContainB = ["Arad",1, "Bucharest", 1, "Craiova", 1, "Drobeta", 1, "Eforie", 1, "Fagaras", 1,
-                         "Giurgiu", 1, "Hirsova", 1, "Iasi", 1, "Lugoj", 1, "Mehadia", 1, "Neamt", 1,
-                         "Oradea", 1, "Pitesti", 1, "Rimnicu Vileea", 1, "Sibiu", 1, "Timisoara", 1,
-                         "Urziceni", 1, "Vaslui", 1, "Zerind", 1]
-    self.cityContainC = ["Lugoj", 5, "Arad", 5, "Oradea", 5]
+    self.cityContainA = ["Lugoj"]
+    self.cityContainB = ["Arad","Bucharest","Craiova","Drobeta","Eforie","Fagaras",
+                         "Giurgiu","Hirsova","Iasi","Lugoj","Mehadia","Neamt",
+                         "Oradea","Pitesti","Rimnicu Vileea","Sibiu","Timisoara",
+                         "Urziceni","Vaslui","Zerind"]
+    self.cityContainC = ["Lugoj","Arad","Oradea"]
 
     self.inventoryA = {"Lugoj":10}
     self.inventoryB = {"Arad":1, "Bucharest":1, "Craiova":1, "Drobeta":1, "Eforie":1, "Fagaras":1,
