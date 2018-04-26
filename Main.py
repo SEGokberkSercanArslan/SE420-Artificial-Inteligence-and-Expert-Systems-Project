@@ -120,7 +120,7 @@ def initializeGraph():
 
     return graph
 
-def shortest_path(graph, origin, destination):
+def shortestPath(graph, origin, destination):
     visited, paths = dijsktra(graph, origin)
     full_path = deque()
     _destination = paths[destination]
@@ -140,7 +140,7 @@ def detectClosestCity(currentLocation,container):
     for i in range(len(container)):
         try:
             x = container[i]
-            distanceArray.append(shortest_path(graph=graph,origin=currentLocation,destination=x))
+            distanceArray.append(shortestPath(graph=graph,origin=currentLocation,destination=x))
         except KeyError:
             pass
     return min(distanceArray)
@@ -184,13 +184,6 @@ if __name__ == '__main__':
                     print(shopDict)
             #current lokasyonda varmı kontrol etttir ardından detected i execute et
             if "B" in element:                                        # Test Output
-                if graph.inventoryB[currentLocation] >= shopDict["B"]:
-                    pass
-                elif graph.inventoryB[currentLocation] <= shopDict["B"]:
-                    pass
-                else:
-                    pass
-
                 detected = detectClosestCity(currentLocation,graph.cityContainB)
                 detectedCity = list(detected)[1][-1]
                 if graph.inventoryB[detectedCity] >= shopDict["B"]:
@@ -229,5 +222,6 @@ if __name__ == '__main__':
                     pathLog.append(detected)
                     print("Small C: "+str(currentLocation))
                     print(shopDict)
-
+pathLog.append(shortestPath(graph,pathLog[-1][1][-1],"Neamt"))
+print("-----------------------------FULL PATH-----------------------------")
 print(pathLog)
