@@ -1,18 +1,18 @@
 from collections import defaultdict
-from Item import Item
 
 class Graph:
   def __init__(self):
     self.nodes = set()
     self.edges = defaultdict(list)
     self.distances = {}
+    #City Containers
     self.cityContainA = ["Lugoj"]
     self.cityContainB = ["Arad","Bucharest","Craiova","Drobeta","Eforie","Fagaras",
                          "Giurgiu","Hirsova","Iasi","Lugoj","Mehadia","Neamt",
                          "Oradea","Pitesti","Rimnicu Vileea","Sibiu","Timisoara",
                          "Urziceni","Vaslui","Zerind"]
     self.cityContainC = ["Lugoj","Arad","Oradea"]
-
+    #City inventory Lists
     self.inventoryA = {"Lugoj":10}
     self.inventoryB = {"Arad":1, "Bucharest":1, "Craiova":1, "Drobeta":1, "Eforie":1, "Fagaras":1,
                          "Giurgiu":1, "Hirsova":1, "Iasi":1, "Lugoj":1, "Mehadia":1, "Neamt":1,

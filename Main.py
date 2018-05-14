@@ -1,32 +1,36 @@
 from Graph import Graph
 from collections import deque
+import sys
+import time
 
-def dijsktra(graph, initial):  # initial baslangic nodu
+start = time.clock() # Start timer
+
+def dijsktra(graph, initial):
   visited = {initial: 0}
   path = {}
 
   nodes = set(graph.nodes)
 
   while nodes:
-    min_node = None
+    minNode = None
     for node in nodes:
       if node in visited:
-        if min_node is None:
-          min_node = node
-        elif visited[node] < visited[min_node]:
-          min_node = node
+        if minNode is None:
+          minNode = node
+        elif visited[node] < visited[minNode]:
+          minNode = node
 
-    if min_node is None:
+    if minNode is None:
       break
 
-    nodes.remove(min_node)
-    current_weight = visited[min_node]
+    nodes.remove(minNode)
+    currentWeight = visited[minNode]
 
-    for edge in graph.edges[min_node]:
-      weight = current_weight + graph.distances[(min_node, edge)]
+    for edge in graph.edges[minNode]:
+      weight = currentWeight + graph.distances[(minNode, edge)]
       if edge not in visited or weight < visited[edge]:
         visited[edge] = weight
-        path[edge] = min_node
+        path[edge] = minNode
 
   return  visited,path #[0] visited [1] path
 
@@ -122,17 +126,17 @@ def initializeGraph():
 
 def shortestPath(graph, origin, destination):
     visited, paths = dijsktra(graph, origin)
-    full_path = deque()
+    fullPath = deque()
     _destination = paths[destination]
 
     while _destination != origin:
-        full_path.appendleft(_destination)
+        fullPath.appendleft(_destination)
         _destination = paths[_destination]
 
-    full_path.appendleft(origin)
-    full_path.append(destination)
+    fullPath.appendleft(origin)
+    fullPath.append(destination)
 
-    return visited[destination], list(full_path)
+    return visited[destination], list(fullPath)
 
 def detectClosestCity(currentLocation,container):
     distanceArray = []
@@ -143,28 +147,28 @@ def detectClosestCity(currentLocation,container):
             distanceArray.append(shortestPath(graph=graph,origin=currentLocation,destination=x))
         except KeyError:
             pass
-    return min(distanceArray)
+    try:
+        return min(distanceArray)
+    except ValueError:
+        print("Cities don't have enough items for collect.")
+        sys.exit(1)
+
+def totalDistance(pathlog):
+    sum = 0
+    for i in range(len(pathLog)):
+        sum += pathLog[i][0]
+    return sum
 
 if __name__ == '__main__':
     graph = initializeGraph()
     startLocation = "Neamt"
     currentLocation = "Neamt"
-    shopDict = {"A":10,"B":20,"C":5}
-    moveNext = False
+    shopDict = {"A":10,"B":20,"C":10} # Note for Mr Kutluhan Erol : Please only modify here if you want to test other things
     pathLog = [] # Shows full path
-
-
-    # Note, After while loop draw a path current node -> start Node
-    # Add path to pathLog
-
-    # Lugoj ve mehadia'yı listeden düşülmesi gerek
-
-    #while total is not 0:
     for element in shopDict.keys(): # element is A -> B -> C
-        #Start location icin de buraya bir if case i ac
         while shopDict[element] is not 0:
             if "A" in element:
-                detected = detectClosestCity(currentLocation,graph.cityContainA) # (910, ['Neamt', 'Iasi', 'Vaslui', 'Urziceni', 'Bucharest', 'Pitesti', 'Craiova', 'Drobeta', 'Mehadia', 'Lugoj'])
+                detected = detectClosestCity(currentLocation,graph.cityContainA) #Ex: (910, ['Neamt', 'Iasi', 'Vaslui', 'Urziceni', 'Bucharest', 'Pitesti', 'Craiova', 'Drobeta', 'Mehadia', 'Lugoj'])
                 detectedCity = list(detected)[1][-1]
                 if graph.inventoryA[detectedCity] >= shopDict["A"]:
                     graph.inventoryA[detectedCity] -= shopDict["A"]
@@ -182,8 +186,7 @@ if __name__ == '__main__':
                     pathLog.append(detected)
                     print("Small A:"+str(currentLocation))
                     print(shopDict)
-            #current lokasyonda varmı kontrol etttir ardından detected i execute et
-            if "B" in element:                                        # Test Output
+            if "B" in element:
                 detected = detectClosestCity(currentLocation,graph.cityContainB)
                 detectedCity = list(detected)[1][-1]
                 if graph.inventoryB[detectedCity] >= shopDict["B"]:
@@ -225,3 +228,8 @@ if __name__ == '__main__':
 pathLog.append(shortestPath(graph,pathLog[-1][1][-1],"Neamt"))
 print("-----------------------------FULL PATH-----------------------------")
 print(pathLog)
+print("Total distance: "+str(totalDistance(pathLog)))
+#print(dijsktra(graph,"Neamt")[0])
+end = time.clock() # finish timer
+print("Complite Time: "+str(end-start))
+#print(dijsktra(graph,"Hirsova")[0])
